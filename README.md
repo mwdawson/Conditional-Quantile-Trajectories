@@ -17,7 +17,9 @@ This repo is here to provide the code and vignettes for this project. A quick gu
 - Transforming snippet data into bivariate data
 - [Nonparametric conditional quantile estimation](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/CondQuantUsage.md)
 - Implementing the differential equation model
-- Simulation study using the Berkeley Growth Data
+- Simulation studies
+  - Berkeley Growth Data
+  - Harvard Six Cities Study of Air Pollution
 
 ## References
 
