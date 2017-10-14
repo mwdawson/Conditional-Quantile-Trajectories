@@ -60,7 +60,7 @@ CondQuant(alpha=.25,
           b.x=.03)
 ```
 
-    ## [1] 0.92
+    ## [1] 0.9
 
 Finally, we can use this function to estimate several quantiles over the entire range of \(X\).
 
