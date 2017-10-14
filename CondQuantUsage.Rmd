@@ -2,7 +2,7 @@
 title: "Using Functions in CondQuant.R"
 author: "Matt Dawson"
 date: "10/14/2017"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
