@@ -15,4 +15,5 @@ Our approach to solve this is simple and flexible. The first key is that very sh
 ## References
 
 For more information, see the corresponding paper: 
-Matthew Dawson and Hans-Georg M&uuml;ller [Dynamic Modeling of Conditional Quantile Trajectories, with Application to Longitudinal Snippet Data](http://www.tandfonline.com/doi/abs/10.1080/01621459.2017.1356321)
+
+Matthew Dawson and Hans-Georg M&uuml;ller, [Dynamic Modeling of Conditional Quantile Trajectories, with Application to Longitudinal Snippet Data](http://www.tandfonline.com/doi/abs/10.1080/01621459.2017.1356321) (2017), *to appear in Journal of the American Statistical Association, Theory and Methods*
