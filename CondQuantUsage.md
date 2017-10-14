@@ -1,0 +1,99 @@
+Introduction
+------------
+
+The idea behind `CondQuant.R` is to estimate conditional quantiles
+nonparametrically. For this, the assumed data is bivariate (*X*, *Z*);
+given the conditonal distribution *F*(*z*|*x*), the target is the
+quantile *F*<sup>−1</sup>(*α*|*x*). Below is a short vignette describing
+how to use the code from `CondQuant.R`. In terms of this repo, this is
+not the end product, but more of an auixilliary result.
+
+Sample Data
+-----------
+
+Let's generate some data to see how to use these functions.
+
+    library(tidyverse)
+    source('CondQuant.R')
+
+    # Nonlinear with non-Gaussian noise
+    x <- runif(n=1000,
+               min=0,
+               max=1)
+    z <- 3*x^2 + rgamma(n=length(x),
+                        shape=1,
+                        rate=2)
+    dat <- as_tibble(data.frame(x = x,
+                                z = z))
+
+    # Plot it
+    ggplot(dat, aes(x=x, y=z)) +
+      geom_point(alpha=.3) +
+      theme_bw()
+
+<img src="CondQuantUsage_files/figure-markdown_strict/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
+
+Calculating Conditional Quantiles
+---------------------------------
+
+The purpose of `CondQuant()` is to estimate conditional quantiles; in
+terms of the variables used, this is the *α* conditional quantile of *Z*
+given *X*. There are several arguments that must be provided, including
+bandwidth parameters, as this is a nonparametric method. Currently, only
+the Gaussian kernel is supported.
+
+-   `alpha` is a vector of probabilities for quantile estimation.
+-   `x0` is the conditioning variable. We estimate the conditional
+    quantile of *Z* given *X* = *x*<sub>0</sub>.
+-   `zGrid` is a grid over the range of *Z* to estimate the quantiles.
+-   `z` is a vector which are observations of *Z*.
+-   `x` is a vector which are observations of *X*.
+-   `b.z` is the bandwidth to be used for smoothing in the
+    *Z*-direction.
+-   `b.x` is the bandwidth to be used for smoothing in the
+    *X*-direction.
+
+So let's estimate the .25 quantile for this data conditional on
+*X* = .5.
+
+    CondQuant(alpha=.25,
+              x0=.5,
+              zGrid=seq(0, 7, .01),
+              z=dat$z,
+              x=dat$x,
+              b.z=.05,
+              b.x=.03)
+
+    ## [1] 0.89
+
+Finally, we can use this function to estimate several quantiles over the
+entire range of *X*.
+
+    # Define a range of x0s and alphas and loop over them.
+    xRange <- seq(0, 1, .01)
+    alphas <- c(.1, .25, .5, .75, .9)
+    quantileMat <- t(sapply(xRange, function(y) {
+      CondQuant(alpha=alphas,
+                x0=y,
+                zGrid=seq(0, 7, .01),
+                z=dat$z,
+                x=dat$x,
+                b.z=.05,
+                b.x=.03)
+    }))
+
+    # Make a nice data frame for plotting
+    quantiles <- as_tibble(data.frame(x = rep(xRange, length(alphas)),
+                                      alpha = factor(rep(alphas,
+                                                         each=length(xRange))),
+                                      quant = c(quantileMat)))
+
+    # Plot quantiles with data
+    ggplot(dat, aes(x=x, y=z)) +
+      geom_point(alpha=.3) +
+      geom_line(data=quantiles,
+                aes(x=x, y=quant, group=alpha, color=alpha),
+                size = 1.5) +
+      theme_bw()
+
+<img src="CondQuantUsage_files/figure-markdown_strict/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
