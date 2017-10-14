@@ -12,6 +12,13 @@ Our approach to solve this is simple and flexible. The first key is that very sh
 
 ## Code
 
+This repo is here to provide the code and vignettes for this project. A quick guide:
+
+- Transforming snippet data into bivariate data
+- [Nonparametric conditional quantile estimation](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/CondQuantUsage.md)
+- Implementing the differential equation model
+- Simulation study using the Berkeley Growth Data
+
 ## References
 
 For more information, see the corresponding paper: 
