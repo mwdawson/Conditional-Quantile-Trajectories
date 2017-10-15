@@ -8,24 +8,30 @@ require(KernSmooth)
 #         - simple: sample mean and least squares fit
 #         - localpoly: local polynomial fits for dense snippets
 Snippet2XZ <- function(t, y, method='simple', b=NA) {
+  
   if(method == 'simple') {
+    
     # simple method for level and slope
     X <- sapply(y, mean)
+    
     Z <- sapply(1:length(t), function(i) {
       unname(lm(values[[i]] ~ times[[i]])$coef[2])
     })
     
   } else if(method == 'localpoly') {
+    
     # local polynomial smoothing for level and slope
     midpts <- sapply(t, function(x) {
       mean(range(x))
     })
+    
     X <- sapply(1:length(t), function(i) {
       fit <- locpoly(t[[i]],
                      y[[i]],
                      bandwidth=b)
       return(fit$y[which.min(abs(fit$x - midpts[i]))])
     })
+    
     Z <- sapply(1:length(t), function(i) {
       fit <- locpoly(t[[i]],
                      y[[i]],
@@ -33,7 +39,6 @@ Snippet2XZ <- function(t, y, method='simple', b=NA) {
                      drv=1)
       return(fit$y[which.min(abs(fit$x - midpts[i]))])
     })
-    
   }
   
   data.frame(X = X,
