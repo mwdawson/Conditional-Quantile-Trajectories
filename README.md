@@ -14,7 +14,7 @@ Our approach to solve this is simple and flexible. The first key is that very sh
 
 This repo is here to provide the code and vignettes for this project. A quick guide:
 
-- Transforming snippet data into bivariate data
+- [Transforming snippet data into bivariate data](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/Snippet2XZUsage.md)
 - [Nonparametric conditional quantile estimation](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/CondQuantUsage.md)
 - Implementing the differential equation model
 - Simulation studies
@@ -25,4 +25,4 @@ This repo is here to provide the code and vignettes for this project. A quick gu
 
 For more information, see the corresponding paper: 
 
-Dawson, M. and M&uuml;ller, H.-G., "Dynamic Modeling of Conditional Quantile Trajectories, with Application to Longitudinal Snippet Data" (2017), *to appear in Journal of the American Statistical Association*, ([link](http://www.tandfonline.com/doi/abs/10.1080/01621459.2017.1356321))
+Dawson, M. and M&uuml;ller, H.-G., "Dynamic Modeling of Conditional Quantile Trajectories, with Application to Longitudinal Snippet Data", *Journal of the American Statistical Association*, 2017 ([link](http://www.tandfonline.com/doi/abs/10.1080/01621459.2017.1356321))
