@@ -25,7 +25,9 @@ ggplot(dense, aes(x=age, y=height, group=id)) +
   theme_bw()
 ```
 
-<img src="Snippet2XZUsage_files/figure-markdown_github/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /> Note that there are two separate snippet datasets here:
+<img src="Snippet2XZUsage_files/figure-markdown_github/unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
+
+Note that there are two separate snippet datasets here:
 
 -   `dense`: densely measured snippets- many observations per snippet.
 -   `sparse`: sparsely measured snippets- two observations per snippet.
@@ -129,4 +131,6 @@ ggplot(sparseSummary, aes(x=X, y=Z)) +
   theme_bw()
 ```
 
-<img src="Snippet2XZUsage_files/figure-markdown_github/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /> First, notice that all slopes are positive since these are coming from growth curves. Also note that for for smaller heights, the slopes are higher. However, you can see the puberty growth spurt starting around heights of 150, where slopes have a small surge. Finally, slopes are flattest for the tallest subjects, indicating that these subjects are done growing for the most part.
+<img src="Snippet2XZUsage_files/figure-markdown_github/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+
+First, notice that all slopes are positive since these are coming from growth curves. Also note that for for smaller heights, the slopes are higher. However, you can see the puberty growth spurt starting around heights of 150, where slopes have a small surge. Finally, slopes are flattest for the tallest subjects, indicating that these subjects are done growing for the most part.
