@@ -1,0 +1,83 @@
+---
+title: "Using Functions in Snippet2XZ.R"
+author: "Matt Dawson"
+date: "10/28/2017"
+output: rmarkdown::github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+This is a simple tutorial for the function `Snippet2XZ` which summarizes snippet information to level and slope pairs $X$ and $Z$.
+
+## Load Sample Data
+
+I've included some snippet data generated from the Berkeley Growth data. Let's look at the data.
+```{r message=FALSE, warning=FALSE, fig.align='center'}
+library(tidyverse)
+
+# Load the data and plot the dense snippets
+load('snippetData.Rdata')
+dense <- out$dense
+sparse <- out$sparse
+ggplot(dense, aes(x=age, y=height, group=id)) +
+  geom_line(size=1, col='dodgerblue') +
+  theme_bw()
+```
+Note that there are two separate snippet datasets here: 
+
++ `dense`: densely measured snippets- many observations per snippet.
++ `sparse`: sparsely measured snippets- two observations per snippet.
+
+To be clear, let's just take a look at the underlying data.
+```{r message=FALSE, warning=FALSE}
+dense[dense$id == 'boy01', ]
+sparse[sparse$id == 'boy01', ]
+```
+
+## Summarize Snippets
+The function `Snippet2XZ` has two methods for extracting level and slope information; in this example we will implement the methods on both datasets. First let's just take a look at what this function does for the first subject.
+```{r message=FALSE, warning=FALSE}
+source('../R/Snippet2XZ.R')
+
+subj1Dense <- dense[dense$id == 'boy01', ]
+subj1Sparse <- sparse[sparse$id == 'boy01', ]
+
+# Simple method
+Snippet2XZ(t=list(subj1Dense$age),
+           y=list(subj1Dense$height),
+           method='simple')
+# Local polynomial method
+Snippet2XZ(t=list(subj1Dense$age),
+           y=list(subj1Dense$height),
+           method='localpoly',
+           b=0.5)
+```
+Notice that the results are similar, but not identical. The simple method does a linear fit on the snippet, while the localpoly method uses local polynomial smoothing to extract level and slope. The localpoly method is preferred for dense snippets, but shouldn't be used for sparse snippets; in these cases the simple method is preferred. Let's continue to see how to estimate level and slope for the entire datasets.
+```{r message=FALSE, warning=FALSE}
+# Put time and value variables in lists
+denseListT <- split(dense$age, dense$id)
+denseListY <- split(dense$height, dense$id)
+sparseListT <- split(sparse$age, sparse$id)
+sparseListY <- split(sparse$height, sparse$id)
+
+# Simple method for sparse data
+sparseSummary <- Snippet2XZ(t=sparseListT,
+                            y=sparseListY)
+
+# Localpoly method for dense data
+denseSummary <- Snippet2XZ(t=denseListT,
+                           y=denseListY,
+                           method='localpoly',
+                           b=0.5)
+```
+Finally, we can plot these summaries to see any differences.
+```{r message=FALSE, warning=FALSE, fig.align='center'}
+ggplot(sparseSummary, aes(x=X, y=Z)) +
+  geom_point(size=2) +
+  geom_point(data=denseSummary, aes(x=X, y=Z), col='red', size=2) +
+  theme_bw()
+```
+First, notice that all slopes are positive since these are coming from growth curves. Also note that for for smaller heights, the slopes are higher. However, you can see the puberty growth spurt starting around heights of 150, where slopes have a small surge. Finally, slopes are flattest for the tallest subjects, indicating that these subjects are done growing for the most part.

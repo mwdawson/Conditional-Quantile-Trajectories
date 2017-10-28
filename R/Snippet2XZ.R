@@ -15,7 +15,7 @@ Snippet2XZ <- function(t, y, method='simple', b=NA) {
     X <- sapply(y, mean)
     
     Z <- sapply(1:length(t), function(i) {
-      unname(lm(values[[i]] ~ times[[i]])$coef[2])
+      unname(lm(y[[i]] ~ t[[i]])$coef[2])
     })
     
   } else if(method == 'localpoly') {
