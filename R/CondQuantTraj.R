@@ -16,7 +16,6 @@ source('CondQuant.R')
 CondQuantTraj <- function(alpha,
                           startingX,
                           zGrid,
-                          xGrid,
                           z,
                           x,
                           b.z,
@@ -24,6 +23,11 @@ CondQuantTraj <- function(alpha,
                           delta,
                           endTime,
                           direction) {
+  
+  # guess at direction if it is not specified
+  if(is.null(direction)) {
+    direction <- ifelse(mean(z) >= 0, 'increasing', 'decreasing')
+  }
   
   # specify a stopping level to avoid estimation without data
   stoppingLevel <- ifelse(direction == 'increasing', max(x), min(x))
