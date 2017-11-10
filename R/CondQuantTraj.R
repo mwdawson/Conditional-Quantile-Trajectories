@@ -22,10 +22,10 @@ CondQuantTraj <- function(alpha,
                           b.x,
                           delta,
                           endTime,
-                          direction) {
+                          direction = NA) {
   
   # guess at direction if it is not specified
-  if(is.null(direction)) {
+  if(is.na(direction)) {
     direction <- ifelse(mean(z) >= 0, 'increasing', 'decreasing')
   }
   
@@ -78,8 +78,9 @@ CondQuantTraj <- function(alpha,
         }
       } else {
         out[i, j+1] <- NA
-      }      
+      }  
     }
+    i = i + 1
   }
   
   return(out)
