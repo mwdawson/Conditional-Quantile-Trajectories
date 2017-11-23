@@ -14,7 +14,7 @@ Our approach to solve this is simple and flexible. The first key is that very sh
 
 This repo is here to provide the code and vignettes for this project. A quick guide:
 
-- [Transforming snippet data into bivariate data](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/Snippet2XZUsage.md)
+- [Transforming snippet data into bivariate data](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/CondQuantUsage.md#using-functions-in-condquantr)
 - [Nonparametric conditional quantile estimation](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/CondQuantUsage.md)
 - [Implementing the differential equation model (main function)](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/R/CondQuantTraj.R)
 - Simulation studies
