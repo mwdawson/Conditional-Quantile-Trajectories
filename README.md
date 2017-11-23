@@ -16,7 +16,7 @@ This repo is here to provide the code and vignettes for this project. A quick gu
 
 - [Transforming snippet data into bivariate data](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/Snippet2XZUsage.md)
 - [Nonparametric conditional quantile estimation](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/Examples/CondQuantUsage.md)
-- Implementing the differential equation model
+- [Implementing the differential equation model (main function)](https://github.com/mwdawson/Conditional-Quantile-Trajectories/blob/master/R/CondQuantTraj.R)
 - Simulation studies
   - Berkeley Growth Data
   - Harvard Six Cities Study of Air Pollution
